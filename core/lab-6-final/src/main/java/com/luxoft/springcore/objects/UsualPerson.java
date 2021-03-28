@@ -1,25 +1,27 @@
 package com.luxoft.springcore.objects;
 
+import java.util.Objects;
+
 public class UsualPerson implements Person {
     private int id;
 
     private String name;
     private City city;
     private int distanceTravelled = 0;
-    
-	private int age;
-	private boolean isProgrammer;
-    
+
+    private int age;
+    private boolean isProgrammer;
+
     public UsualPerson(String name, int age, City city) {
-    	this.name = name;
-    	this.age = age;
-    	this.city = city;
+        this.name = name;
+        this.age = age;
+        this.city = city;
     }
 
     public int getAge() {
-		return age;
-	}
-    
+        return age;
+    }
+
     public void setAge(int age) {
         this.age = age;
     }
@@ -36,17 +38,17 @@ public class UsualPerson implements Person {
         return city;
     }
 
-    public void setCountry(City city) {
+    public void setCity(City city) {
         this.city = city;
     }
-    
+
     public int getDistanceTravelled() {
-		return distanceTravelled;
-	}
-    
+        return distanceTravelled;
+    }
+
     public void setDistanceTravelled(int distanceTravelled) {
-		this.distanceTravelled = distanceTravelled;
-	}
+        this.distanceTravelled = distanceTravelled;
+    }
 
     public boolean isProgrammer() {
         return isProgrammer;
@@ -64,19 +66,12 @@ public class UsualPerson implements Person {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
-    public void travel(City source, City destination) {
-    	
-    }
 
     public String toString() {
-        String s = "Name: " + name + "\n"
+        return "Name: " + name + "\n"
                 + "Age: " + age + "\n"
                 + "City: " + city + "\n"
                 + "Is Programmer?: " + isProgrammer + "\n";
-
-        return s;
     }
 
     public boolean equals(Object o) {
@@ -87,8 +82,8 @@ public class UsualPerson implements Person {
 
         if (age != person.age) return false;
         if (isProgrammer != person.isProgrammer) return false;
-        if (city != null ? !city.equals(person.city) : person.city != null) return false;
-        if (name != null ? !name.equals(person.name) : person.name != null) return false;
+        if (!Objects.equals(city, person.city)) return false;
+        if (!Objects.equals(name, person.name)) return false;
 
         return true;
     }
