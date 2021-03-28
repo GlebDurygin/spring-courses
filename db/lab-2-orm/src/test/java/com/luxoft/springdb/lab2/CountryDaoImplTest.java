@@ -31,9 +31,7 @@ public class CountryDaoImplTest {
 	@Test
 	@DirtiesContext
 	public void testSaveCountry() {
-
 		countryDao.save(exampleCountry);
-
 		List<Country> countryList = countryDao.getAllCountries();
 		assertEquals(1, countryList.size());
 		assertEquals(exampleCountry, countryList.get(0));
@@ -42,7 +40,6 @@ public class CountryDaoImplTest {
 	@Test
 	@DirtiesContext
 	public void testGtAllCountries() {
-
 		countryDao.save(exampleCountry);
 		countryDao.save(new Country("Canada", "CA"));
 
@@ -53,10 +50,8 @@ public class CountryDaoImplTest {
 	@Test
 	@DirtiesContext
 	public void testGetCountryByName() {
-
 		countryDao.save(exampleCountry);
 		Country country = countryDao.getCountryByName("Australia");
 		assertEquals(exampleCountry, country);
 	}
-
 }
