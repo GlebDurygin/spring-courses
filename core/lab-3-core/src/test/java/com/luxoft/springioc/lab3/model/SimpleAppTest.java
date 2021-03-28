@@ -1,8 +1,4 @@
 package com.luxoft.springioc.lab3.model;
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,52 +7,56 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.AbstractApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+
+@ImportResource("classpath:application-context.xml")
 public class SimpleAppTest {
-	
-	private AbstractApplicationContext context;
 
-	private UsualPerson expectedPerson;
+    private AbstractApplicationContext context;
 
-	@Before
-	public void setUp() {
-		context = new AnnotationConfigApplicationContext(SimpleAppTest.class);
-		expectedPerson = getExpectedPerson();
-	}
+    private UsualPerson expectedPerson;
 
-	@Test
-	public void testInitPerson() {
-		UsualPerson person = (UsualPerson) context.getBean("person");
-//		FYI: Another way to achieve the bean
-//		person = context.getBean(UsualPerson.class);
-		assertEquals(expectedPerson, person);
-		System.out.println(person);
-	}
+    @Before
+    public void setUp() {
+        context = new AnnotationConfigApplicationContext(SimpleAppTest.class);
+        expectedPerson = getExpectedPerson();
+    }
 
-	private UsualPerson getExpectedPerson() {
-		UsualPerson person = new UsualPerson();
-		person.setAge(35);
-		person.setHeight(1.78F);
-		person.setIsProgrammer(true);
-		person.setName("Ivan Ivanov");
+    @Test
+    public void testInitPerson() {
+        UsualPerson person = context.getBean(UsualPerson.class);
+        assertEquals(expectedPerson, person);
+        System.out.println(person);
+    }
 
-		Country country = new Country();
-		country.setId(1);
-		country.setName("Russia");
-		country.setCodeName("RU");
+    private UsualPerson getExpectedPerson() {
+        UsualPerson person = new UsualPerson();
+        person.setAge(35);
+        person.setHeight(1.78F);
+        person.setIsProgrammer(true);
+        person.setName("Ivan Ivanov");
 
-		person.setCountry(country);
+        Country country = new Country();
+        country.setId(1);
+        country.setName("Russia");
+        country.setCodeName("RU");
 
-		List<String> contacts = new ArrayList<String>();
-		contacts.add("asd@asd.ru");
-		contacts.add("+7-234-456-67-89");
+        person.setCountry(country);
 
-		person.setContacts(contacts);
+        List<String> contacts = new ArrayList<>();
+        contacts.add("asd@asd.ru");
+        contacts.add("+7-234-456-67-89");
 
-		return person;
-	}
-	
-	@After
-	public void tearDown() {
-		context.close();
-	}
+        person.setContacts(contacts);
+
+        return person;
+    }
+
+    @After
+    public void tearDown() {
+        context.close();
+    }
 }
