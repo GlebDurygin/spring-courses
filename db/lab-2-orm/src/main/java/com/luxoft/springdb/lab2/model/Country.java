@@ -1,15 +1,28 @@
 package com.luxoft.springdb.lab2.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 
+@Entity
+@Table(name = "COUNTRY")
 public class Country implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	@Column(name = "NAME")
 	private String name;
 
+	@Column(name = "CODE_NAME")
 	private String codeName;
 
 	public Country() {
@@ -58,9 +71,9 @@ public class Country implements Serializable {
 
 		Country country = (Country) o;
 
-		if (codeName != null ? !codeName.equals(country.codeName) : country.codeName != null)
+		if (!Objects.equals(codeName, country.codeName))
 			return false;
-		if (name != null ? !name.equals(country.name) : country.name != null)
+		if (!Objects.equals(name, country.name))
 			return false;
 
 		return true;
