@@ -9,6 +9,7 @@
 
 	<jdbc:embedded-database id="dataSource">
 		<jdbc:script location="classpath:db-schema.sql"/>	
+		<jdbc:script location="classpath:init-data.sql"/>
 	</jdbc:embedded-database>
 
     <bean id="countryDao" class="com.luxoft.springdb.lab1.dao.CountryDao">
