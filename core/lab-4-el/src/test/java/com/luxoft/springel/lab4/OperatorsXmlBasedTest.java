@@ -14,7 +14,7 @@ public class OperatorsXmlBasedTest {
 	private AbstractApplicationContext context;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		context = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_XML_FILE_NAME);
 	}
 	
@@ -34,5 +34,4 @@ public class OperatorsXmlBasedTest {
 	public void tearDown() {
 		context.close();
 	}
-
 }
