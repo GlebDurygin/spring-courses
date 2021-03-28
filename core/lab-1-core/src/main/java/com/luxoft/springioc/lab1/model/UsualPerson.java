@@ -1,30 +1,20 @@
 package com.luxoft.springioc.lab1.model;
 
-import java.util.List;
+import java.util.Objects;
 
 public class UsualPerson implements Person {
-    private int id;
-
     private String name;
-
     private Country country;
-
     private int age;
-    private float height;
-    private boolean isProgrammer;
 
-    private List<String> contacts;
-
-    public void setIsProgrammer(boolean isProgrammer) {
-        this.isProgrammer = isProgrammer;
+    public UsualPerson(String name, Country country, int age) {
+        this.name = name;
+        this.country = country;
+        this.age = age;
     }
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public void setHeight(float height) {
-        this.height = height;
     }
 
     public void setName(String name) {
@@ -46,44 +36,10 @@ public class UsualPerson implements Person {
         this.country = country;
     }
 
-    public boolean isProgrammer() {
-        return isProgrammer;
-    }
-
-    public void setProgrammer(boolean programmer) {
-        isProgrammer = programmer;
-    }
-
-    public List<String> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(List<String> contacts) {
-        this.contacts = contacts;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String toString() {
-        String s = "Name: " + name + "\n"
+        return "Name: " + name + "\n"
                 + "Age: " + age + "\n"
-                + "Height: " + height + "\n"
-                + "Country: " + country + "\n"
-                + "Is Programmer?: " + isProgrammer + "\n";
-        if ((contacts != null) && (!contacts.isEmpty())) {
-            s += "Contacts: ";
-            for (String contact : contacts) {
-                s += contact + ", ";
-            }
-            s += "\n";
-        }
-        return s;
+                + "Country: " + country + "\n";
     }
 
     public boolean equals(Object o) {
@@ -93,20 +49,14 @@ public class UsualPerson implements Person {
         UsualPerson person = (UsualPerson) o;
 
         if (age != person.age) return false;
-        if (Float.compare(person.height, height) != 0) return false;
-        if (isProgrammer != person.isProgrammer) return false;
-        if (country != null ? !country.equals(person.country) : person.country != null) return false;
-        if (name != null ? !name.equals(person.name) : person.name != null) return false;
-
-        return true;
+        if (!Objects.equals(country, person.country)) return false;
+        return Objects.equals(name, person.name);
     }
 
     public int hashCode() {
         int result;
         result = (name != null ? name.hashCode() : 0);
         result = 31 * result + age;
-        result = 31 * result + (height != +0.0f ? Float.floatToIntBits(height) : 0);
-        result = 31 * result + (isProgrammer ? 1 : 0);
         result = 31 * result + (country != null ? country.hashCode() : 0);
         return result;
     }
