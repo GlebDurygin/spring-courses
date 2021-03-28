@@ -1,60 +1,56 @@
 package com.luxoft.springioc.lab2.model;
-import static org.junit.Assert.*;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.luxoft.springioc.lab2.model.Country;
-import com.luxoft.springioc.lab2.model.UsualPerson;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class SimpleAppTest {
-	
-	protected static final String APPLICATION_CONTEXT_XML_FILE_NAME = "classpath:application-context.xml";
 
-	private AbstractApplicationContext context;
+    protected static final String APPLICATION_CONTEXT_XML_FILE_NAME = "classpath:application-context.xml";
 
-	private UsualPerson expectedPerson;
+    private AbstractApplicationContext context;
 
-	@Before
-	public void setUp() throws Exception {
-		context = new ClassPathXmlApplicationContext(
-				APPLICATION_CONTEXT_XML_FILE_NAME);
-		expectedPerson = getExpectedPerson();
-	}
+    private UsualPerson expectedPerson;
 
-	@Test
-	public void testInitPerson() {
-		UsualPerson person = (UsualPerson) context.getBean("person");
-//		FYI: Another way to achieve the bean
-//		person = context.getBean(UsualPerson.class);
-		assertEquals(expectedPerson, person);
-		System.out.println(person);
-	}
+    @Before
+    public void setUp() {
+        context = new ClassPathXmlApplicationContext(APPLICATION_CONTEXT_XML_FILE_NAME);
+        expectedPerson = getExpectedPerson();
+    }
 
-	private UsualPerson getExpectedPerson() {
-		UsualPerson person = new UsualPerson();
-		person.setAge(35);
-		person.setHeight(1.78F);
-		person.setIsProgrammer(true);
-		person.setName("Ivan Ivanov");
+    @Test
+    public void testInitPerson() {
+        UsualPerson person = context.getBean(UsualPerson.class);
+        assertEquals(expectedPerson, person);
+        System.out.println(person);
+    }
 
-		Country country = new Country();
-		country.setId(1);
-		country.setName("Russia");
-		country.setCodeName("RU");
+    private UsualPerson getExpectedPerson() {
+        UsualPerson person = new UsualPerson();
+        person.setAge(35);
+        person.setHeight(1.78F);
+        person.setIsProgrammer(true);
+        person.setName("Ivan Ivanov");
 
-		person.setCountry(country);
+        Country country = new Country();
+        country.setId(1);
+        country.setName("Russia");
+        country.setCodeName("RU");
 
-		List<String> contacts = new ArrayList<String>();
-		contacts.add("asd@asd.ru");
-		contacts.add("+7-234-456-67-89");
+        person.setCountry(country);
 
-		person.setContacts(contacts);
+        List<String> contacts = new ArrayList<>();
+        contacts.add("asd@asd.ru");
+        contacts.add("+7-234-456-67-89");
 
-		return person;
-	}
+        person.setContacts(contacts);
+
+        return person;
+    }
 }

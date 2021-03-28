@@ -1,5 +1,7 @@
 package com.luxoft.springioc.lab2.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 public class UsualPerson implements Person {
@@ -7,6 +9,7 @@ public class UsualPerson implements Person {
 
     private String name;
 
+    @Autowired
     private Country country;
 
     private int age;

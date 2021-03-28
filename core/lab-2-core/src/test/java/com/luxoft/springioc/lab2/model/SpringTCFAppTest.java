@@ -1,8 +1,4 @@
 package com.luxoft.springioc.lab2.model;
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,51 +7,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.luxoft.springioc.lab2.model.Country;
-import com.luxoft.springioc.lab2.model.UsualPerson;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:application-context.xml")
 public class SpringTCFAppTest {
-	
-	@Autowired
-	private UsualPerson person;
 
-	private UsualPerson expectedPerson;
-	
+    @Autowired
+    private UsualPerson person;
 
-	@Before
-	public void setUp() throws Exception {
-		expectedPerson = getExpectedPerson();
-	}
+    private UsualPerson expectedPerson;
 
-	@Test
-	public void testInitPerson() {
-		assertEquals(expectedPerson, person);
-		System.out.println(person);
-	}
+    @Before
+    public void setUp() {
+        expectedPerson = getExpectedPerson();
+    }
 
-	private UsualPerson getExpectedPerson() {
-		UsualPerson person = new UsualPerson();
-		person.setAge(35);
-		person.setHeight(1.78F);
-		person.setIsProgrammer(true);
-		person.setName("Ivan Ivanov");
+    @Test
+    public void testInitPerson() {
+        assertEquals(expectedPerson, person);
+        System.out.println(person);
+    }
 
-		Country country = new Country();
-		country.setId(1);
-		country.setName("Russia");
-		country.setCodeName("RU");
+    private UsualPerson getExpectedPerson() {
+        UsualPerson person = new UsualPerson();
+        person.setAge(35);
+        person.setHeight(1.78F);
+        person.setIsProgrammer(true);
+        person.setName("Ivan Ivanov");
 
-		person.setCountry(country);
+        Country country = new Country();
+        country.setId(1);
+        country.setName("Russia");
+        country.setCodeName("RU");
 
-		List<String> contacts = new ArrayList<String>();
-		contacts.add("asd@asd.ru");
-		contacts.add("+7-234-456-67-89");
+        person.setCountry(country);
 
-		person.setContacts(contacts);
+        List<String> contacts = new ArrayList<>();
+        contacts.add("asd@asd.ru");
+        contacts.add("+7-234-456-67-89");
 
-		return person;
-	}
+        person.setContacts(contacts);
 
+        return person;
+    }
 }
