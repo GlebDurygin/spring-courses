@@ -1,6 +1,8 @@
 package com.luxoft.springdb.lab3;
-import static org.junit.Assert.assertTrue;
 
+import com.luxoft.springdb.lab3.dao.CountryNotFoundException;
+import com.luxoft.springdb.lab3.service.ProgrammaticTransactionCountryService;
+import com.luxoft.springdb.lab3.service.TransactionLog;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,15 +13,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
 
-import com.luxoft.springdb.lab3.dao.CountryNotFoundException;
-import com.luxoft.springdb.lab3.service.ProgrammaticTransactionCountryService;
-import com.luxoft.springdb.lab3.service.TransactionLog;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:application-context.xml")
 public class ProgrammaticTransactionTest extends JdbcTest {
-	
-	@Autowired
+
+    @Autowired
     private ProgrammaticTransactionCountryService programmaticTransactionCountryService;
 
     @Before
@@ -27,7 +27,7 @@ public class ProgrammaticTransactionTest extends JdbcTest {
         super.setUp();
         TransactionLog.clear();
     }
-    
+
     @After
     public void tearDown() throws Exception {
         TransactionLog.clear();
