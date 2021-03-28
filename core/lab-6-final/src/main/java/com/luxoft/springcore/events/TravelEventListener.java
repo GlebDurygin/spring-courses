@@ -26,7 +26,6 @@ public class TravelEventListener {
         int distance = getDistance(source, destination);
         person.setCity(destination);
         person.setDistanceTravelled(person.getDistanceTravelled() + distance);
-        System.out.println(person.getName() + " has arrived to " + destination.toString());
     }
 
     protected int getDistance(City source, City destination) {
